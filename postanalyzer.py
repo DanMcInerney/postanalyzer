@@ -3,7 +3,6 @@ import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
-localip = [x[4] for x in scapy.all.conf.route.routes if x[2] != '0.0.0.0'][0]
 log = open('postanalyzer.log', 'ab')
 
 prev_ack = 0
