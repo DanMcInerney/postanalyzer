@@ -15,7 +15,7 @@ def cb(pkt):
 	post_found = 0
 	if pkt.haslayer(Raw):
 
-		load = repr(pkt[Raw].load)[1:-1]
+		load = pkt[Raw].load
 
 		try:
 			headers, body = load.split(r"\r\n\r\n", 1)
@@ -35,11 +35,11 @@ def cb(pkt):
 		header_lines = headers.split(r"\r\n")
 		for h in header_lines:
 			if 'post /' in h.lower():
-				post_found = h.split(' ')[1].split(' ')[0]
+				post_found = h.split(' ')[1]
 		if post_found:
 			for h in header_lines:
 				if 'host: ' in h.lower():
-					host = h.split(' ')[1].split(' ')[0]
+					host = h.split(' ')[1]
 					print 'URL:',host+post_found
 				elif 'referer: ' in h.lower():
 					print h
